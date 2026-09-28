@@ -7,7 +7,7 @@ Este repositorio documenta la configuración de políticas de acceso, gestión d
 ##  Resumen del Laboratorio
 * **Servidor (DC):** Windows Server (`WS-25-DC-1-DOM1.dominio1.local`) con rol Active Directory Domain Services.
 * **Cliente:** Windows 11 Pro (`WIN11-CLIENTE`) unido al dominio `DOMINIO1`.
-* **Identidad auditada:** Usuario estándar `deniz.auditor` perteneciente al grupo de seguridad `Sec-Auditores`.
+* **Identidad auditada:** Usuario estándar `deniz.auditor` perteneciente al grupo de seguridad `G-Auditores`.
 * **Mecanismo de seguridad:** Directiva de Bloqueo de Cuentas vía GPO (*Default Domain Policy*), configurada con un umbral de 3 intentos fallidos y duración de 15 minutos.
 * **Objetivo defensivo:** Trazar el ciclo de vida de una sesión (inicio, fallos repetidos, bloqueo reactivo y cierre) en el Visor de Eventos de Windows (`Security.evtx`).
 
