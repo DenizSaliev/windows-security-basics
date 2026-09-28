@@ -1,9 +1,9 @@
-# 🏢 Fundamentos de Seguridad en Windows Server y Active Directory
+#  Fundamentos de Seguridad en Windows Server y Active Directory
 
-## 🎯 Objetivo del Laboratorio
+##  Objetivo del Laboratorio
 El propósito de esta práctica es analizar la administración de identidades, la aplicación de directivas de grupo (GPO) y la monitorización de eventos de seguridad en un entorno de Directorio Activo (AD DS). El ejercicio está orientado hacia el análisis defensivo (Blue Team) y la operativa de un perfil SOC Junior, evaluando cómo se auditan los inicios de sesión, las anomalías de autenticación y los bloqueos preventivos.
 
-## 🖥️ Entorno y Máquinas Implicadas
+##  Entorno y Máquinas Implicadas
 * **Controlador de Dominio (DC):** Windows Server (`WS-25-DC-1-DOM1.dominio1.local`) con rol Active Directory Domain Services.
 * **Equipo Cliente:** Windows 11 Pro (`WIN11-CLIENTE`) unido al dominio corporativo `DOMINIO1`.
 * **Segmento de Red:** Red privada local aislada mediante adaptador virtual (Host-Only).
@@ -11,12 +11,12 @@ El propósito de esta práctica es analizar la administración de identidades, l
 
 ---
 
-## ⚙️ 1. Configuración Realizada
+##  1. Configuración Realizada
 
 1. **Estructura Lógica en Active Directory:**
    * Creación de la Unidad Organizativa: `OU=Seguridad_Lab,DC=dominio1,DC=local`.
    * Alta de cuenta de usuario estándar: `deniz.auditor`.
-   * Creación de grupo de seguridad de ámbito global: `Sec-Auditores`, vinculando al usuario como miembro.
+   * Creación de grupo de seguridad de ámbito global: `G-Auditores`, vinculando al usuario como miembro.
 
 2. **Directiva de Bloqueo de Cuentas (GPO):**
    Configurada a través de la *Default Domain Policy* en `gpmc.msc`:
@@ -27,7 +27,7 @@ El propósito de esta práctica es analizar la administración de identidades, l
 
 ---
 
-## 🔍 2. Eventos Generados y Ubicación en el Sistema
+##  2. Eventos Generados y Ubicación en el Sistema
 
 Los eventos de seguridad se auditan en el registro del sistema operativo:
 > **Ubicación:** `Visor de eventos (eventvwr.msc) -> Registros de Windows -> Seguridad` (`Security.evtx`)
@@ -41,7 +41,7 @@ Los eventos de seguridad se auditan en el registro del sistema operativo:
 
 ---
 
-## 📸 3. Evidencias del Visor de Eventos
+##  3. Evidencias del Visor de Eventos
 
 ### Inicio de Sesión Exitoso (Event ID 4624)
 > Registro interactivo con usuario validado y asignación de Logon Type 2.
@@ -61,7 +61,7 @@ Los eventos de seguridad se auditan en el registro del sistema operativo:
 
 ---
 
-## 📊 4. Tabla de Resultados y Análisis Defensivo
+##  4. Tabla de Resultados y Análisis Defensivo
 
 | Event ID / Registro | Servicio / Contexto | Identidad Implicada | Riesgo Inicial Evaluado | Qué revisaría desde Blue Team |
 | :---: | :--- | :--- | :--- | :--- |
@@ -72,7 +72,7 @@ Los eventos de seguridad se auditan en el registro del sistema operativo:
 
 ---
 
-## 🛡️ 5. Conclusión de Seguridad Defensiva
+##  5. Conclusión de Seguridad Defensiva
 
 * **Qué servicios y cuentas deberían revisarse:**
   Se debe auditar periódicamente el estado de las cuentas que sufren bloqueos recurrentes para descartar configuraciones huérfanas en dispositivos auxiliares (móviles en Wi-Fi o unidades de red mapeadas). Asimismo, debe verificarse que los Controladores de Dominio no tengan habilitados servicios innecesarios que expongan vectores de autenticación heredados (como NTLMv1 o SMBv1).
